@@ -31,7 +31,8 @@ export const SpatialWallView: React.FC<SpatialWallViewProps> = ({
               <img
                 src={project.thumbnail}
                 alt={project.title}
-                loading="lazy"
+                loading="eager"
+                decoding="async"
                 className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
               />
 
