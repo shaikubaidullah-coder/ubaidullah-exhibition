@@ -222,13 +222,13 @@ export const FolioSpreadView: React.FC<FolioSpreadViewProps> = ({
       </div>
 
       {/* Pagination & Mobile Navigation Row */}
-      <div className="mt-6 sm:mt-8 flex items-center justify-center gap-4">
+      <div className="mt-6 sm:mt-8 flex items-center justify-center gap-3 sm:gap-4">
         {/* Mobile Prev Button */}
         <button
           onClick={handlePrev}
           disabled={currentIndex === 0}
           aria-label="Previous work"
-          className="sm:hidden tactile-interactive w-8 h-8 rounded-full bg-white border border-[#242820]/12 flex items-center justify-center text-[#242820] disabled:opacity-20 shadow-xs"
+          className="sm:hidden tactile-interactive w-9 h-9 rounded-full bg-white border border-[#242820]/12 flex items-center justify-center text-[#242820] disabled:opacity-20 shadow-xs active:scale-95 transition-transform"
         >
           <ArrowLeft className="w-3.5 h-3.5" />
         </button>
@@ -255,7 +255,7 @@ export const FolioSpreadView: React.FC<FolioSpreadViewProps> = ({
           onClick={handleNext}
           disabled={currentIndex === projects.length - 1}
           aria-label="Next work"
-          className="sm:hidden tactile-interactive w-8 h-8 rounded-full bg-white border border-[#242820]/12 flex items-center justify-center text-[#242820] disabled:opacity-20 shadow-xs"
+          className="sm:hidden tactile-interactive w-9 h-9 rounded-full bg-white border border-[#242820]/12 flex items-center justify-center text-[#242820] disabled:opacity-20 shadow-xs active:scale-95 transition-transform"
         >
           <ArrowRight className="w-3.5 h-3.5" />
         </button>

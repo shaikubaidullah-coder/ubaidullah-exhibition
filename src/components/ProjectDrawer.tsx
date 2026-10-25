@@ -32,7 +32,7 @@ export const ProjectDrawer: React.FC<ProjectDrawerProps> = ({
         className="relative w-full max-w-lg bg-white h-full shadow-2xl flex flex-col justify-between overflow-y-auto animate-in slide-in-from-right duration-200 border-l border-[#0E1726]/10"
       >
         {/* Drawer Header */}
-        <div className="p-6 border-b border-[#0E1726]/8 flex items-center justify-between">
+        <div className="p-5 sm:p-6 border-b border-[#0E1726]/8 flex items-center justify-between">
           <span className="text-xs font-mono text-[#0E1726]/50 uppercase tracking-widest">
             {project.category}
           </span>
@@ -40,17 +40,17 @@ export const ProjectDrawer: React.FC<ProjectDrawerProps> = ({
           <button
             onClick={onClose}
             aria-label="Close"
-            className="tactile-interactive w-8 h-8 rounded-full bg-stone-100 hover:bg-stone-200 flex items-center justify-center text-[#0E1726]/70 hover:text-[#0E1726] transition-colors"
+            className="tactile-interactive w-9 h-9 rounded-full bg-stone-100 hover:bg-stone-200 flex items-center justify-center text-[#0E1726]/70 hover:text-[#0E1726] transition-colors"
           >
             <X className="w-4 h-4" />
           </button>
         </div>
 
         {/* Drawer Content */}
-        <div className="p-6 sm:p-8 space-y-6 flex-1">
+        <div className="p-5 sm:p-8 space-y-6 flex-1">
           
           {/* Specimen Preview */}
-          <div className="rounded-xl overflow-hidden border border-[#0E1726]/10 bg-stone-900 aspect-[16/10] shadow-xs">
+          <div className="rounded-xl overflow-hidden border border-[#0E1726]/10 bg-[#242820]/5 aspect-[16/10] shadow-xs">
             <img
               src={project.thumbnail}
               alt={project.title}

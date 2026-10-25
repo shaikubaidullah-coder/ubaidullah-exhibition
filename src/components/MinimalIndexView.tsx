@@ -58,12 +58,12 @@ export const MinimalIndexView: React.FC<MinimalIndexViewProps> = ({
               </span>
 
               <div className="min-w-0 flex-1">
-                <div className="flex items-baseline gap-2">
-                  <h3 className="font-serif text-base sm:text-xl font-bold text-[#242820] truncate group-hover:opacity-75 transition-opacity">
+                <div className="flex flex-col sm:flex-row sm:items-baseline gap-0.5 sm:gap-2">
+                  <h3 className="font-serif text-sm sm:text-xl font-bold text-[#242820] leading-snug group-hover:opacity-75 transition-opacity">
                     {project.title}
                   </h3>
-                  <span className="text-[10px] font-mono text-[#8B9084] sm:hidden shrink-0 uppercase">
-                    {project.category.split(' ')[0]}
+                  <span className="text-[10px] font-mono text-[#8B9084] sm:hidden uppercase tracking-wider">
+                    {project.category}
                   </span>
                 </div>
                 <p className="font-sans text-xs text-[#5E6357] truncate hidden sm:block">
@@ -81,7 +81,7 @@ export const MinimalIndexView: React.FC<MinimalIndexViewProps> = ({
             <div className="flex items-center gap-2 sm:gap-3 shrink-0">
               <button
                 onClick={() => onOpenDrawer(project)}
-                className="tactile-interactive text-xs font-sans text-[#5E6357] hover:text-[#242820] underline underline-offset-2 hidden xs:inline"
+                className="tactile-interactive text-xs font-sans text-[#5E6357] hover:text-[#242820] underline underline-offset-2 py-1 px-1.5"
               >
                 Details
               </button>

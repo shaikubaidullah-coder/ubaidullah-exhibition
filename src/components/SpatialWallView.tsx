@@ -75,7 +75,7 @@ export const SpatialWallView: React.FC<SpatialWallViewProps> = ({
 
               <button
                 onClick={() => onOpenDrawer(project)}
-                className="tactile-interactive text-xs font-sans text-[#0E1726]/60 hover:text-[#0E1726] underline underline-offset-2"
+                className="tactile-interactive text-xs font-sans text-[#242820]/70 hover:text-[#242820] underline underline-offset-2 py-1 px-2 -mr-1 rounded hover:bg-black/5 transition-colors"
               >
                 Details
               </button>

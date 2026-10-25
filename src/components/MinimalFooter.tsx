@@ -12,7 +12,7 @@ export const MinimalFooter: React.FC = () => {
   const github = 'https://github.com/shaikubaidullah-coder';
 
   return (
-    <footer className="border-t border-[#242820]/10 py-6 sm:py-8 bg-[#FAF7EE] text-xs font-mono text-[#5E6357]">
+    <footer className="border-t border-[#242820]/10 py-6 sm:py-8 pb-20 sm:pb-8 bg-[#FAF7EE] text-xs font-mono text-[#5E6357]">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
         
         {/* Left: Author & Statement */}
