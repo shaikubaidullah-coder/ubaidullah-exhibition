@@ -92,7 +92,7 @@ export const ProjectDrawer: React.FC<ProjectDrawerProps> = ({
         </div>
 
         {/* Drawer Actions Footer */}
-        <div className="p-6 border-t border-[#0E1726]/8 bg-stone-50/40 flex items-center justify-between gap-3">
+        <div className="p-5 pb-16 sm:pb-5 border-t border-[#0E1726]/8 bg-stone-50/40 flex items-center justify-between gap-3">
           {project.isPrivateRepo ? (
             <span className="inline-flex items-center gap-1.5 text-xs font-mono text-[#0E1726]/50">
               <Lock className="w-3.5 h-3.5" />
