@@ -26,7 +26,7 @@ export const SpatialWallView: React.FC<SpatialWallViewProps> = ({
               href={project.productionUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="relative rounded-xl overflow-hidden bg-stone-900 border border-[#0E1726]/10 aspect-[16/10] shadow-xs transition-all duration-300 group-hover:shadow-md block"
+              className="relative rounded-xl overflow-hidden bg-[#242820]/5 border border-[#242820]/10 aspect-[16/10] shadow-xs transition-all duration-300 group-hover:shadow-md block"
             >
               <img
                 src={project.thumbnail}
