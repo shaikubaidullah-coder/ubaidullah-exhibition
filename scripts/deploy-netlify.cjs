@@ -130,6 +130,12 @@ async function deploy() {
   }, zipBuffer);
 
   console.log('Deploy status code:', deployRes.status);
+  if (deployRes.status !== 200 && deployRes.status !== 201) {
+    const errorMsg = typeof deployRes.data === 'object' ? JSON.stringify(deployRes.data) : (deployRes.raw || deployRes.data);
+    console.error(`❌ Deploy failed (HTTP ${deployRes.status}):`, errorMsg);
+    process.exit(1);
+  }
+
   const deployData = deployRes.data;
   console.log('Deploy ID:', deployData.id);
   console.log('Deploy State:', deployData.state);
