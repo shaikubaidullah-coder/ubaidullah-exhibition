@@ -23,9 +23,26 @@ try {
   process.exit(1);
 }
 
-// 2. Load Token
-const config = JSON.parse(fs.readFileSync('/Users/shaikubaidullah/.gemini/config/mcp_config.json', 'utf8'));
-const token = config.mcpServers.netlify.env.NETLIFY_AUTH_TOKEN;
+// 2. Load Token (Environment variable first, fallback to user config dynamically)
+const os = require('os');
+let token = process.env.NETLIFY_AUTH_TOKEN;
+
+if (!token) {
+  const localMcpPath = path.join(os.homedir(), '.gemini', 'config', 'mcp_config.json');
+  if (fs.existsSync(localMcpPath)) {
+    try {
+      const config = JSON.parse(fs.readFileSync(localMcpPath, 'utf8'));
+      token = config?.mcpServers?.netlify?.env?.NETLIFY_AUTH_TOKEN;
+    } catch (e) {
+      // Fallback parse failure ignored
+    }
+  }
+}
+
+if (!token) {
+  console.error('Error: NETLIFY_AUTH_TOKEN environment variable is required.');
+  process.exit(1);
+}
 
 const preferredName = 'ubaidullah-exhibition';
 
