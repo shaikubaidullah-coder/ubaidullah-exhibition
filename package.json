@@ -2,7 +2,7 @@
   "name": "ubaidullah-exhibition",
   "private": true,
   "version": "1.0.0",
-  "description": "Shaik Ubaidullah — Digital Exhibition of 12 live creations across Sound Engineering, Creative Code, and AI Automation Systems.",
+  "description": "Shaik Ubaidullah — Digital Exhibition of 15 live creations across Sound Engineering, Creative Code, and AI Automation Systems.",
   "type": "module",
   "scripts": {
     "dev": "vite",

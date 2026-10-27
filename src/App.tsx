@@ -34,7 +34,7 @@ export const App: React.FC = () => {
   }, [searchQuery]);
 
   return (
-    <div className="min-h-[100dvh] flex flex-col bg-[#FAF7EE] text-[#242820] relative bg-paper-grain selection:bg-[#242820] selection:text-white">
+    <div className="min-h-[100dvh] w-full max-w-full overflow-x-hidden flex flex-col bg-[#FAF7EE] text-[#242820] relative bg-paper-grain selection:bg-[#242820] selection:text-white">
       
       {/* Site Masthead Navigation */}
       <MinimalMasthead

@@ -26,6 +26,9 @@ export const ProjectDrawer: React.FC<ProjectDrawerProps> = ({
       role="dialog"
       aria-modal="true"
       aria-label={`Details for ${project.title}`}
+      onClick={(e) => {
+        if (e.target === e.currentTarget) onClose();
+      }}
       className="fixed inset-0 z-50 overflow-hidden bg-black/40 backdrop-blur-xs flex justify-end"
     >
       <div 
@@ -50,12 +53,25 @@ export const ProjectDrawer: React.FC<ProjectDrawerProps> = ({
         <div className="p-5 sm:p-8 space-y-6 flex-1">
           
           {/* Specimen Preview */}
-          <div className="rounded-xl overflow-hidden border border-[#0E1726]/10 bg-[#242820]/5 aspect-[16/10] shadow-xs">
+          <div className="relative rounded-xl overflow-hidden border border-[#0E1726]/10 bg-[#242820]/5 aspect-[16/10] shadow-xs">
             <img
               src={project.thumbnail}
               alt={project.title}
+              onError={(e) => {
+                const target = e.currentTarget;
+                target.style.display = 'none';
+                const fallback = target.nextElementSibling as HTMLElement | null;
+                if (fallback) fallback.style.display = 'flex';
+              }}
               className="w-full h-full object-cover object-top"
             />
+            <div 
+              style={{ display: 'none' }}
+              className="absolute inset-0 flex-col items-center justify-center p-6 text-center bg-stone-100"
+            >
+              <span className="font-serif font-bold text-xl text-[#242820]">{project.title}</span>
+              <span className="text-xs font-mono text-[#5E6357] mt-1.5 uppercase tracking-wider">{project.category}</span>
+            </div>
           </div>
 
           {/* Title & Core Intent */}
@@ -93,7 +109,7 @@ export const ProjectDrawer: React.FC<ProjectDrawerProps> = ({
 
         {/* Drawer Actions Footer */}
         <div className="p-5 pb-16 sm:pb-5 border-t border-[#0E1726]/8 bg-stone-50/40 flex items-center justify-between gap-3">
-          {project.isPrivateRepo ? (
+          {project.isPrivateRepo || !project.repositoryUrl ? (
             <span className="inline-flex items-center gap-1.5 text-xs font-mono text-[#0E1726]/50">
               <Lock className="w-3.5 h-3.5" />
               <span>Private repository</span>

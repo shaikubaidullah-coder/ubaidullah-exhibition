@@ -9,11 +9,19 @@
 }
 
 /* Ambient Studio Base */
+html {
+  overflow-x: hidden;
+  max-width: 100vw;
+  width: 100%;
+}
+
 body {
   background-color: var(--bg-canvas);
   color: var(--color-ink);
   font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
-  overflow-x: clip;
+  overflow-x: hidden;
+  max-width: 100vw;
+  width: 100%;
 }
 
 /* Book Spine Gradient */

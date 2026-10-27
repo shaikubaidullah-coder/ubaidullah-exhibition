@@ -21,7 +21,7 @@ export const LetterContactSection: React.FC = () => {
     e.preventDefault();
     if (!message.trim()) return;
     setSent(true);
-    const subject = encodeURIComponent('Inquiry from Website Showcase');
+    const subject = encodeURIComponent('Inquiry from Shaik Ubaidullah Exhibition');
     const body = encodeURIComponent(message);
     setTimeout(() => {
       window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;

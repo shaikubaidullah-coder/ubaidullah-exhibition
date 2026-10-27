@@ -33,8 +33,22 @@ export const SpatialWallView: React.FC<SpatialWallViewProps> = ({
                 alt={project.title}
                 loading="eager"
                 decoding="async"
+                onError={(e) => {
+                  const target = e.currentTarget;
+                  target.style.display = 'none';
+                  const fallback = target.nextElementSibling as HTMLElement | null;
+                  if (fallback) fallback.style.display = 'flex';
+                }}
                 className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
               />
+
+              <div 
+                style={{ display: 'none' }}
+                className="absolute inset-0 flex-col items-center justify-center p-6 text-center bg-stone-100"
+              >
+                <span className="font-serif font-bold text-xl text-[#242820]">{project.title}</span>
+                <span className="text-xs font-mono text-[#5E6357] mt-1.5 uppercase tracking-wider">{project.category}</span>
+              </div>
 
               <div className="absolute inset-0 bg-black/25 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                 <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white text-[#0E1726] text-xs font-sans font-medium shadow-md">

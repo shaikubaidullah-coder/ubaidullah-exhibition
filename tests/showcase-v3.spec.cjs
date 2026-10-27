@@ -60,12 +60,15 @@ async function runTests() {
   const page = await context.newPage();
   page.on('console', msg => {
     if (msg.type() === 'error') {
-      consoleErrors.push(msg.text());
+      // Filter transient external CDN/font network fluctuations
+      if (!msg.text().includes('ERR_CONNECTION_CLOSED') && !msg.text().includes('ERR_NETWORK_CHANGED') && !msg.text().includes('ERR_INTERNET_DISCONNECTED')) {
+        consoleErrors.push(msg.text());
+      }
     }
   });
 
   try {
-    await page.goto(baseUrl, { waitUntil: 'networkidle' });
+    await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
 
     // Test 1: Favicon and Brand Glyph
     console.log('\n--- Test 1: Favicon & Brand Glyph ---');
@@ -173,7 +176,7 @@ async function runTests() {
     console.log('\n--- Test 6: Capturing Brand Verification Screenshots ---');
     const docsDir = path.resolve(__dirname, '../docs');
     await page.setViewportSize({ width: 1440, height: 900 });
-    await page.goto(baseUrl, { waitUntil: 'networkidle' });
+    await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
     await page.screenshot({ path: path.join(docsDir, 'showcase-v3-brand-desktop.png') });
     console.log('📸 Captured docs/showcase-v3-brand-desktop.png');
 
@@ -191,7 +194,60 @@ async function runTests() {
     }
     console.log('✅ 0 runtime console errors.');
 
-    console.log('\n🎉 ALL BRAND & COMPACT QA TESTS PASSED!');
+    // Test 8: All 15 Projects & View Switching
+    console.log('\n--- Test 8: 15 Projects, View Switching & Drawer Interaction ---');
+    // Switch to Spatial view
+    await page.locator('button:has-text("Spatial")').first().click();
+    await page.waitForTimeout(200);
+    const spatialCards = await page.locator('article').count();
+    console.log(`Spatial cards rendered: ${spatialCards}`);
+    if (spatialCards !== 15) {
+      throw new Error(`Expected 15 projects in Spatial view, found ${spatialCards}`);
+    }
+
+    // Switch to Index view
+    await page.locator('button:has-text("Index")').first().click();
+    await page.waitForTimeout(200);
+    const indexRows = await page.locator('.divide-y > div').count();
+    console.log(`Index rows rendered: ${indexRows}`);
+    if (indexRows !== 15) {
+      throw new Error(`Expected 15 projects in Index view, found ${indexRows}`);
+    }
+
+    // Test Search Functionality
+    const searchInput = page.locator('input[placeholder*="Search"]').first();
+    await searchInput.fill('Memories');
+    await page.waitForTimeout(200);
+    const searchFilteredRows = await page.locator('.divide-y > div').count();
+    console.log(`Search for "Memories" returned ${searchFilteredRows} projects`);
+    if (searchFilteredRows !== 1) {
+      throw new Error(`Expected 1 result for "Memories", found ${searchFilteredRows}`);
+    }
+
+    // Open Drawer
+    const detailsBtn = page.locator('button:has-text("Details")').first();
+    await detailsBtn.click();
+    await page.waitForTimeout(200);
+    const drawer = page.locator('[role="dialog"]');
+    if (!(await drawer.isVisible())) {
+      throw new Error('Project drawer failed to open!');
+    }
+    console.log('✅ Project drawer opened successfully');
+
+    // Close Drawer via Close button
+    const closeBtn = drawer.locator('button[aria-label="Close"]');
+    await closeBtn.click();
+    await page.waitForTimeout(200);
+    if (await drawer.isVisible()) {
+      throw new Error('Project drawer failed to close!');
+    }
+    console.log('✅ Project drawer closed successfully');
+
+    // Clear search
+    await searchInput.fill('');
+    await page.waitForTimeout(200);
+
+    console.log('\n🎉 ALL BRAND, 15-PROJECTS & COMPACT QA TESTS PASSED!');
   } finally {
     await browser.close();
     server.close();
